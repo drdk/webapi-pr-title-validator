@@ -36,6 +36,16 @@ You can customize the branches that the action will run on by changing `master` 
 
 By adding the GitAction a workflow will automatically be created and run when a pull request is made.
 
+### Enforcing test
+
+The action if will run automatically if added to repo, but it is not required to run or pass to merge pull request. To enforce the test you can do the dollowing:
+
+1. Go to settings page for repo.
+2. Choose `Branches` from sidemenu.
+3. Check `Require status checks to pass before merging` if not checked.
+4. Select `lint` option in list of possible checks.
+5. Save changes.
+
 ## Errors
 
 If the workflow is run on events that are not pull requests such as pull requests etc. An error will be thrown and the workflow will fail.
