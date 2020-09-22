@@ -32,11 +32,11 @@ jobs:
 
 You can customize the branches that the action will run on by changing `master` and `develop` to anything you like. You can remove the branches all together to run the action on every branch.
 
-## Running test
+## Running action
 
 By adding the GitAction a workflow will automatically be created and run when a pull request is made.
 
-### Enforcing test
+### Enforcing action
 
 The action if will run automatically if added to repo, but it is not required to run or pass to merge pull request. To enforce the test you can do the dollowing:
 
