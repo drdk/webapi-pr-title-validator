@@ -1,5 +1,5 @@
 name: webapi-pr-validator
-author: TeamWebAPI <hello@dr.dk>
+author: TeamWebAPI <dl-WebAPI@dr.dk>
 description: Validate title of PRs to follow the conventional specification. (https://www.conventionalcommits.org/).
 runs:
   using: docker
