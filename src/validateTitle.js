@@ -11,7 +11,9 @@ module.exports = async function validateTitle(title) {
         conventionalChangelogConfig = await conventionalChangelogConfig();
     }
     const { parserOpts } = conventionalChangelogConfig;
-    const result = parser(title, parserOpts);
+    let clean_title = title.replace("!:", ":");
+    clean_title = clean_title.replace("BREAKING CHANGE", "feat");
+    const result = parser(clean_title, parserOpts);
 
     if (!result.type) {
         throw new Error(
