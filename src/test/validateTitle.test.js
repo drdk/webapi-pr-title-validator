@@ -1,6 +1,5 @@
 const validateTitle = require('../validateTitle');
 
-// Install preset (takes some time)
 jest.setTimeout(10000);
 
 it('detects valid PR titles', async () => {
