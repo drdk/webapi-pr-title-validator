@@ -31,4 +31,24 @@ module.exports = async function validateTitle(title) {
             )}.`
         );
     }
+
+    if (result.type != "chore") {
+        let match = title.match(/.* (\(\#\d*\))\s?$/);
+
+        if (!match) {
+            throw new Error(
+                `No commit id is present in message.`
+            );
+        }
+    }
+
+    if (result.type == "feat") {
+        let match = title.match(/^.* (\[.*?\]).*?/);
+
+        if (!match) {
+            throw new Error(
+                `Jira ID is required for pull requests of type "feat".`
+            );
+        }
+    }
 };
