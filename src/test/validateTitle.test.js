@@ -14,6 +14,8 @@ it('detects valid PR titles', async () => {
         "feat!: check order of resources in behat tests [MIM-1409] (#123)",
         "BREAKING CHANGE: check order of resources in behat tests [MIM-1409] (#123)",
         "fix(release): need to depend on latest rxjs and zone.js (#123)",
+        "feat(release): need to depend on latest rxjs and zone.js [MIM-1409] (#123)",
+        "feat(release)!: need to depend on latest rxjs and zone.js [MIM-1409] (#123)",
         "chore: merge develop into master",
         "chore(merge): merge develop into master"
     ];
