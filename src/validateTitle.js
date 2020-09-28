@@ -1,3 +1,4 @@
+const core = require('@actions/core');
 const parser = require('conventional-commits-parser').sync;
 const conventionalCommitTypes = require('conventional-commit-types');
 
@@ -7,6 +8,9 @@ function isFunction(functionToCheck) {
 
 module.exports = async function validateTitle(title) {
     let conventionalChangelogConfig = require("conventional-changelog-angular");
+    let requiresCommitIds = core.getInput('commit_ids');
+    let requiresJiraIds = core.getInput('jira_ids');
+
     if (isFunction(conventionalChangelogConfig)) {
         conventionalChangelogConfig = await conventionalChangelogConfig();
     }
@@ -32,7 +36,7 @@ module.exports = async function validateTitle(title) {
         );
     }
 
-    if (result.type != "chore") {
+    if (requiresCommitIds.includes(result.type)) {
         let match = title.match(/.* (\(\#\d*\))\s?$/);
 
         if (!match) {
@@ -42,7 +46,7 @@ module.exports = async function validateTitle(title) {
         }
     }
 
-    if (result.type == "feat") {
+    if (requiresJiraIds.includes(result.type)) {
         let match = title.match(/^.* (\[.*?\]).*?/);
 
         if (!match) {

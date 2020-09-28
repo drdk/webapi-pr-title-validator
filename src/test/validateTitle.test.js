@@ -26,11 +26,12 @@ it('detects valid PR titles', async () => {
     }
 });
 
-it('throws for PR titles without a commit id', async () => {
-    await expect(validateTitle('style: check order of resources in behat tests [MIM-1409]')).rejects.toThrow(
-        /No commit id is present in message./
-    );
-});
+// Dependent on configuration
+// it('throws for PR titles without a commit id', async () => {
+//     await expect(validateTitle('style: check order of resources in behat tests [MIM-1409]')).rejects.toThrow(
+//         /No commit id is present in message./
+//     );
+// });
 
 it('throws for PR titles without a type', async () => {
     await expect(validateTitle('Fix bug')).rejects.toThrow(
@@ -38,11 +39,12 @@ it('throws for PR titles without a type', async () => {
     );
 });
 
-it('throws for PR titles without a Jira Id if type is feat', async () => {
-    await expect(validateTitle('feat: check order of resources in behat tests (#123)')).rejects.toThrow(
-        /Jira ID is required for pull requests of type "feat"./
-    );
-});
+// Dependent on configuration
+// it('throws for PR titles without a Jira Id if type is feat', async () => {
+//     await expect(validateTitle('feat: check order of resources in behat tests (#123)')).rejects.toThrow(
+//         /Jira ID is required for pull requests of type "feat"./
+//     );
+// });
 
 it('throws for PR titles with an unknown type', async () => {
     await expect(validateTitle('foo: Bar')).rejects.toThrow(
