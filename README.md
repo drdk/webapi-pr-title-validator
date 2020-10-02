@@ -9,7 +9,7 @@ Do the following to setup this Github Action on your repo:
 1. Create folder `.github` in root of project
 2. Create folder `workflows` inside the `.github` folder
 3. Create `.yml` file by name you choose. E.g. `pr-validation.yml` inside the `workflows` folder.
-4. Copy / Paste the following content into the file:
+4. Copy & Paste the following content into the file:
 ```
 name: Check PR title
 on:
@@ -32,6 +32,33 @@ jobs:
 
 You can customize the branches that the action will run on by changing `master` and `develop` to anything you like. You can remove the branches all together to run the action on every branch.
 
+### Configuation of enforcement of commit and Jira ids
+
+You can enforce the types of commits that should require either Jira or Commit IDs.
+
+After you have defined the job, pass `commit_ids` and/or `jira_ids` as arguments to the job using the `with` key:
+
+```
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: drdk/pr-validator@master
+      with:
+          jira_ids:
+            - feat
+          commit_ids:
+            - feat
+            - docs
+            - fix
+            - build
+            - ci
+            - style
+            - refactor
+            - perf
+            - test
+```
+
 ## Running action
 
 By adding the GitAction a workflow will automatically be created and run when a pull request is made.
@@ -43,7 +70,8 @@ The action if will run automatically if added to repo, but it is not required to
 1. Go to settings page for repo.
 2. Choose `Branches` from sidemenu.
 3. Check `Require status checks to pass before merging` if not checked.
-4. Select `lint` option in list of possible checks.
+4. Select `lint` option in list of possible checks. 
+  (*Enforce another name if you have changed the name in your configuation.*)
 5. Save changes.
 
 ## Errors
