@@ -3,7 +3,7 @@ const validateTitle = require('../validateTitle');
 jest.setTimeout(1000);
 
 beforeEach(() => {
-    setInput('commit_ids', 'feat,fix');
+    setInput('commit_ids', 'feat, fix');
     setInput('jira_ids', 'feat');
 });
 
@@ -35,12 +35,6 @@ it('detects valid PR titles', async () => {
     }
 });
 
-it('throws for PR titles without a commit id', async () => {
-    await expect(validateTitle('feat: check order of resources in behat tests [MIM-1409]')).rejects.toThrow(
-        /No commit id is present in message./
-    );
-});
-
 it('throws for PR titles without a type', async () => {
     await expect(validateTitle('Fix bug')).rejects.toThrow(
         /No release type found in pull request title "Fix bug"./
@@ -49,7 +43,13 @@ it('throws for PR titles without a type', async () => {
 
 it('throws for PR titles without a Jira Id if type is feat', async () => {
     await expect(validateTitle('feat: check order of resources in behat tests (#123)')).rejects.toThrow(
-        /Jira ID is required for pull requests of type "feat"./
+        /Jira ID is required for pull requests of type: \"feat\"./
+    );
+});
+
+it('throws for PR titles without a commit id', async () => {
+    await expect(validateTitle('feat: check order of resources in behat tests [MIM-1409]')).rejects.toThrow(
+        /Commit ID is required for pull requests of type: \"feat\"./
     );
 });
 

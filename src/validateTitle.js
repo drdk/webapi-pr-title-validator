@@ -8,8 +8,6 @@ function isFunction(functionToCheck) {
 
 module.exports = async function validateTitle(title) {
     let conventionalChangelogConfig = require("conventional-changelog-angular");
-    let requiresCommitIds = core.getInput('commit_ids');
-    let requiresJiraIds = core.getInput('jira_ids');
 
     if (isFunction(conventionalChangelogConfig)) {
         conventionalChangelogConfig = await conventionalChangelogConfig();
@@ -36,23 +34,38 @@ module.exports = async function validateTitle(title) {
         );
     }
 
-    if (requiresCommitIds.split(',').includes(result.type)) {
+    if (getCommitTypes().includes(result.type)) {
         let match = title.match(/.* (\(\#\d*\))\s?$/);
 
         if (!match) {
             throw new Error(
-                `No commit id is present in message.`
+                `Commit ID is required for pull requests of type: "${result.type}".`
             );
         }
     }
 
-    if (requiresJiraIds.split(',').includes(result.type)) {
+    if (getJiraTypes().includes(result.type)) {
         let match = title.match(/^.* (\[.*?\]).*?/);
 
         if (!match) {
             throw new Error(
-                `Jira ID is required for pull requests of type "feat".`
+                `Jira ID is required for pull requests of type: "${result.type}".`
             );
         }
+    }
+
+    function getJiraTypes()
+    {
+        return getTrimmedArray(core.getInput('jira_ids'));
+    }
+
+    function getCommitTypes()
+    {
+        return getTrimmedArray(core.getInput('commit_ids'));
+    }
+
+    function getTrimmedArray(data)
+    {
+        return data.split(',').map(Function.prototype.call, String.prototype.trim);
     }
 };
