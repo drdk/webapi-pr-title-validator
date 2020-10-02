@@ -3,8 +3,8 @@ const validateTitle = require('../validateTitle');
 jest.setTimeout(1000);
 
 beforeEach(() => {
-    setInput('commit_ids', ['feat']);
-    setInput('jira_ids', ['feat']);
+    setInput('commit_ids', 'feat,fix');
+    setInput('jira_ids', 'feat');
 });
 
 const setInput = (name,value)=>

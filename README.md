@@ -36,7 +36,8 @@ You can customize the branches that the action will run on by changing `master` 
 
 You can enforce the types of commits that should require either Jira or Commit IDs.
 
-After you have defined the job, pass `commit_ids` and/or `jira_ids` as arguments to the job using the `with` key:
+After you have defined the job, pass `commit_ids` and/or `jira_ids` as arguments to the job using the `with` key.
+You must provide `types` as a comma seperated string:
 
 ```
 jobs:
@@ -45,18 +46,8 @@ jobs:
     steps:
       - uses: drdk/pr-validator@master
       with:
-          jira_ids:
-            - feat
-          commit_ids:
-            - feat
-            - docs
-            - fix
-            - build
-            - ci
-            - style
-            - refactor
-            - perf
-            - test
+          jira_ids: feat
+          commit_ids: feat,docs,fix,build,ci,style,perf,test
 ```
 
 ## Running action

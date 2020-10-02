@@ -36,7 +36,7 @@ module.exports = async function validateTitle(title) {
         );
     }
 
-    if (requiresCommitIds.includes(result.type)) {
+    if (requiresCommitIds.split(',').includes(result.type)) {
         let match = title.match(/.* (\(\#\d*\))\s?$/);
 
         if (!match) {
@@ -46,7 +46,7 @@ module.exports = async function validateTitle(title) {
         }
     }
 
-    if (requiresJiraIds.includes(result.type)) {
+    if (requiresJiraIds.split(',').includes(result.type)) {
         let match = title.match(/^.* (\[.*?\]).*?/);
 
         if (!match) {
