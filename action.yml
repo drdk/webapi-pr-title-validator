@@ -4,3 +4,10 @@ description: Validate title of PRs to follow the conventional specification. (ht
 runs:
   using: docker
   image: Dockerfile
+inputs:
+  jira_ids:
+    description: 'List of types that require Jira Ids (as comma seperated string)'
+    required: false
+  commit_ids:
+    description: 'List of types that require Commit Ids (as comma seperated string)'
+    required: false
